@@ -1,0 +1,81 @@
+
+#http://5.61.48.15/partner_api //hdboxAPi
+entry point api
+#/request_token 
+    request post >> :
+    content-type: application/x-www-form-urlencoded
+    params:
+        key =  //random string len 32 using symbols "abcdefghijklmnopqrstuvwxyz1234567890"
+        token =  //random string len 40 using symbols "abcdefghijklmnopqrstuvwxyz1234567890"
+    response << :
+    content-type: applicantion/json
+    params:
+    //json object 
+        "token" : //string token for authorization on hdboxApi len 465 symbols
+        "expired" : //unix epoch date. date before key expiration. usially the key is given for a month
+
+
+#/my_ip
+return {"ip": "your ip, "country" :"country code"}
+#/film
+##/film/{FilmId}/details
+    request >> :
+    header:
+        X-FX-Token : token //465 len string named "token" from /request_token
+    response << :
+    //json object
+        "id" : film id //int
+        "url" : url on filmix.co //string
+        "category": //string
+        "title": //string
+        "original_title": //string
+        "year": //int year
+        "updated": // string date "2020-03-04T17:29:38+02:00"
+        "duration": //int
+        "directors": 
+            [{
+            "id": //string
+            "name": //string
+                } ]
+        "actors": 
+            [{
+            "id": //string
+            "name": //string
+            }],
+        "countries": 
+            [{
+            "id": //int
+            "name": //string
+            }]
+        "genres": 
+            [{
+            "id": //int
+            "name"://string
+            }]
+        "poster": //string url to jpeg poster
+        "quality": //string
+        "votesPos": //int
+        "votesNeg": //int
+        "ratingImdb": //int
+        "votesImdb": //int
+        "ratingKinopoisk": //int
+        "votesKinopoisk": //int
+        "short_story": //string 
+        "mpaa": //string age limit "18+"
+        "slogan": //string
+        "last_episode": { //for serial??
+        "season": //int
+        "episode": //string
+        "translation": //string
+        "date": //string date "2020-03-04T17:29:28+02:00"
+        "idKinopoisk": //int
+        "status": {
+            "comment": //string
+            "status": //string
+            "status_text":  //string
+        }
+        "max_episode": {
+            "post_id":  //string filmId
+            "season":  //string
+            "episode":  //string
+        }
