@@ -49,7 +49,7 @@ func initFilmix() {
 	f, err := os.Create("kinopub.toml")
 	check(err)
 	defer f.Close()
-	fstring := fmt.Sprintf("Code = %s\nUserCode = %s\nVerificationURI = %s\nInterval = %d\nExpiresIn = %d\n ",
+	fstring := fmt.Sprintf("Code = \"%s\"\nUserCode = \"%s\"\nVerificationURI = \"%s\"\nInterval = %d\nExpiresIn = %d\n ",
 		regData.Code, regData.UserCode, regData.VerificationURI, regData.Interval, regData.ExpiresIn)
 	_, err = f.WriteString(fstring)
 	check(err)
