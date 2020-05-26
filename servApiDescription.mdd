@@ -12,7 +12,7 @@ entry point api
     params:
     //json object 
         "token" : //string token for authorization on hdboxApi len 465 symbols
-        "expired" : //unix epoch date. date before key expiration. usially the key is given for a month
+        "expired" : //int unix epoch date. date before key expiration. usially the key is given for a month
 
 
 #/my_ip
