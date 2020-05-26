@@ -1,4 +1,4 @@
-package HDesktopBox
+package filmix
 
 import (
 	"encoding/json"

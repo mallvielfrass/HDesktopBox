@@ -1,3 +1,6 @@
 
 ignore
 test
+.toml
+client/kinopub.toml
+client/filmix.toml

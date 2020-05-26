@@ -1,4 +1,4 @@
-package HDesktopBox
+package filmix
 
 //par := "search=" + word + "&sort=news_read&page=0"
 
