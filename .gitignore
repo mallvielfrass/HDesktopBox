@@ -4,3 +4,4 @@ test
 .toml
 client/kinopub.toml
 client/filmix.toml
+client/console/kinopub.toml
