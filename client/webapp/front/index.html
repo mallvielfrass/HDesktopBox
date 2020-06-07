@@ -3,16 +3,40 @@
 
 <head>
   <meta charset="utf-8">
-
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css2.css">
 </head>
 
 
 <body>
   <div id="app">
-    {{ message }}
+
+    <div class="rootContainer">
+
+      <div class="search">
+        <form class="search">
+        <input type="text" class="searchTerm" placeholder="What are you looking for?" :value="movieTitle"
+        @keyup="handleChange">
+        <button type="submit" @click="handleSubmit"  value="SEARCH" class="searchButton">
+          &#8981;
+        </button>
+      </form>
+      </div>
+      <div class="result">
+        <div class="resultItem">
+          <div class="item">result Item</div>
+          <div class="item">result Item</div>
+          <div class="item">result Item</div>
+          <div class="item">result Item</div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
- 
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="script.js"></script>
+
 </html>

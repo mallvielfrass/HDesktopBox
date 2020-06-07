@@ -8,8 +8,15 @@
 .resultItem {
     height: 40px;
     width: 100%;
-    margin: 5px;
+    
 
+}
+.item {
+    border: 1px solid #00B4CC;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    width: 100%;
+    background: #fff;
 }
 .result{
     justify-content: center; 
@@ -19,6 +26,7 @@
     width: 100%;
     display: flex;
  justify-content: center; 
+ margin-bottom: 10px;
 }
 .rootContainer{
     width: 90%;
