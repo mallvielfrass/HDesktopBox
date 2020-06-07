@@ -32,7 +32,7 @@ func GetToken() (FXToken string) {
 
 	client := &http.Client{}
 
-	req, _ := http.NewRequest("GET", "http://filmix.vielfrass.tk", nil)
+	req, _ := http.NewRequest("GET", "http://filmix.vielfrass.tk/api/token", nil)
 	//	req, _ := http.NewRequest("POST", url, nil)
 	//req.Header.Add("Accept", "application/x-www-form-urlencoded")
 	//	req.Header.Add("Accept-Encoding", "gzip")
