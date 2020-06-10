@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta charset="UTF-8">
-  <link rel="stylesheet"  type="text/css" href="static/css2.css">
+  <link rel="stylesheet"  type="text/css" href="static/css/css2.css">
+  <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
 </head>
 
 
@@ -12,16 +13,14 @@
   <div id="app">
 
     <div class="rootContainer">
-
-
       <div class="search">
-        <form class="search">
-          <input type="text" class="searchTerm" placeholder="What are you looking for?" :value="movieTitle"
-            @keyup="handleChange">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What are you looking for?" :value="movieTitle" @keyup.enter="handleSubmit"
+            @keyup="handleChange" >
           <button type="button" value="SEARCH" @click="handleSubmit" class="searchButton">
             &#8981;
           </button>
-        </form>
+        </div>
       </div>
      
         <div class="v-message" v-html='message'> </div>
@@ -32,8 +31,8 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="static/script.js"></script>
-<script src="static/gen.js"></script>
+<script src="static/js/script.js"></script>
+<script src="static/js/gen.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>
