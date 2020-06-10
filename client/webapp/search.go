@@ -6,9 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"strings"
 
-	"github.com/gorilla/mux"
 	"github.com/mallvielfrass/HDesktopBox/filmix"
 )
 
@@ -29,7 +27,7 @@ type Directors struct {
 	Name string `json:"name"`
 }
 type FilmInfo struct {
-	IDKinopoisk   int64       `json:"idKinopoisk"`
+	ID            int         `json:"id"`
 	Slogan        string      `json:"slogan"`
 	Title         string      `json:"title"`
 	Countries     interface{} `json:"countries"`
@@ -45,12 +43,7 @@ type Result struct {
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
-	//profile := Profile{"Alex", []string{"snowboarding", "programming"}}
-
-	//token := filmix.GetToken()
-	//fmt.Println("token:", token)
 	keys := r.URL.Query()
-	//deviceGUID := keys.Get("deviceGUID") //Get return empty string if key not found
 	q := keys.Get("q")
 	lim, err := strconv.Atoi(keys.Get("l"))
 	if err != nil {
@@ -66,12 +59,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 	api := filmix.API("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6ImZ4LTVlZGQ3MGNiMzUzZGEifQ.eyJpc3MiOiJodHRwczpcL1wvZmlsbWl4Lm1lIiwiYXVkIjoiaHR0cHM6XC9cL2ZpbG1peC5tZSIsImp0aSI6ImZ4LTVlZGQ3MGNiMzUzZGEiLCJpYXQiOjE1OTE1NzA2MzUsIm5iZiI6MTU5MTU1OTgzNSwiZXhwIjoxNTk0MTYyNjM1LCJwYXJ0bmVyX2lkIjoiMiIsImhhc2giOiI2NzVhZjZiMDBiYWZhMDhmOGYwMDE5Y2Q3YWMyYmM4Zjk0MmQ0NDY5IiwidXNlcl9pZCI6bnVsbCwiaXNfcHJvIjpmYWxzZSwiaXNfcHJvX3BsdXMiOmZhbHNlLCJzZXJ2ZXIiOiIifQ.0xnppIMMr53upxHhrNbPkD0QJ5I14EyG72qMxfnbQL4")
 	filmId := api.Search(q)
 	count := len(filmId.Items)
-	//	a := []FilmInfo{}
-	// equivalent to "append(a, b[0], b[1], b[2])"
 	fmt.Println("api ", filmId)
-	//IdInf := api.Info(filmId.Items[0].ID)
-	//
-	//fmt.Printf("%s | %s | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID)
 	if count < lim {
 		lim = count
 	}
@@ -79,9 +67,9 @@ func search(w http.ResponseWriter, r *http.Request) {
 	FilmInfostr := []FilmInfo{}
 	for i := 0; i < lim; i++ {
 		IdInf := api.Info(filmId.Items[i].ID)
-		fmt.Printf("%s | %s | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID)
+		fmt.Printf("%s | %s | %d | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID, IdInf.IDKinopoisk)
 		b := FilmInfo{
-			IDKinopoisk:   IdInf.IDKinopoisk,
+			ID:            IdInf.ID,
 			Slogan:        IdInf.Slogan,
 			Title:         IdInf.Title,
 			Countries:     IdInf.Countries,
@@ -106,7 +94,6 @@ func search(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.Header().Set("Content-Type", "application/json")
-	//	fmt.Println(js)
 	w.Write(js)
 }
 func jearch(w http.ResponseWriter, r *http.Request) {
@@ -117,62 +104,4 @@ func jearch(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	//	fmt.Println(js)
 	fmt.Fprintf(w, `{"filminfo":[{"idKinopoisk":470036,"slogan":"«From the creators of Despicable Me»","title":"Лоракс","countries":[{"id":2,"name":"США"}],"poster":"https://thumbs.bookdline.live/s/posters/thumbs/w220/loraks_film_2012_37834_0.jpeg","directors":[{"id":"Kristoffer-Boae","name":"Кристоффер Боэ"}],"short_story":"Так, много лет спустя, по вине человека, с планеты исчезли все деревья. Воздух теперь можно покупать в отдельных бутылочках, а внешний мир радует своей красотой. Одно желание - и у тебя под окном океан, второй - а там лес. Одно отличие от прошлой жизни, что все это пластиковое. Но многие дети, не видели настоящих деревьев, и потому уже не знают, чем этот мир может быть хуже. Теду всего двенадцать лет, но у него уже есть девушка. Одри, которую он так сильно любит, любит мечтать, а еще ее самое большое желание - увидеть живое дерево. Самое настоящее, которое видели еще ее родители. У Теда нет желания сказать, Одри нет, потому сначала, он спрашивает у бабушки, а потом отправляется к знакомому, который видел последнее дерево. И как оказывается, именно по его вине все это произошло, когда-то давно мужчине не послушал духа леса Лоракса и уничтожил все деревья. Теперь Теду предстоит посадить последнее дерево и найти духа, но это будет сложно, так как против этого выступают и власти и родители мальчика.","year":2012,"original_title":"Dr. Seuss\\' The Lorax"},{"idKinopoisk":341898,"slogan":"-","title":"Лоракс","countries":[{"id":2,"name":"США"}],"poster":"https://thumbs.bookdline.live/s/posters/thumbs/w220/loraks-the-lorax-1972_77557_0.jpeg","directors":[{"id":"Xouli-Praett","name":"Хоули Прэтт"}],"short_story":"Мальчик попал  в безлесную пустошь, чтобы встретиться с разорившимся промышленником, который  рассказал ему историю о произошедшем с ним. Сначала он создал процветающий бизнес, основанный на бесполезном продукте моды, который был получен из лесных деревьев.","year":1972,"original_title":"The Lorax"}],"count":2}`)
-}
-
-func (fs FileSystem) Open(path string) (http.File, error) {
-	f, err := fs.fs.Open(path)
-	if err != nil {
-		return nil, err
-	}
-
-	s, err := f.Stat()
-	if s.IsDir() {
-		index := strings.TrimSuffix(path, "/") + "/index.html"
-		if _, err := fs.fs.Open(index); err != nil {
-			return nil, err
-		}
-	}
-
-	return f, nil
-}
-func filmHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
-	response := fmt.Sprintf("film %s", id)
-	fmt.Println("response", response)
-	fmt.Fprint(w, response)
-}
-func index(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/index.html")
-	//fmt.Fprint(w, "index")
-}
-
-func NewRouter() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
-
-	// Choose the folder to serve
-	staticDir := "/static/"
-
-	// Create the route
-	router.
-		PathPrefix(staticDir).
-		Handler(http.StripPrefix(staticDir, http.FileServer(http.Dir("."+staticDir))))
-
-	return router
-}
-func faviconHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./static/logo/favicon.ico")
-}
-func main() {
-	router := NewRouter()
-
-	router.HandleFunc("/film/{id}", filmHandler)
-
-	router.HandleFunc("/s", search)
-	router.HandleFunc("/j", jearch)
-	router.HandleFunc("/favicon.ico", faviconHandler)
-	router.HandleFunc("/", index)
-	if err := http.ListenAndServe(":8080", router); err != nil {
-		log.Fatal("ListenAndServe Error: ", err)
-	}
 }

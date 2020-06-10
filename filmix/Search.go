@@ -14,7 +14,7 @@ type Items struct {
 	Category        string      `json:"category"`
 	Countries       []Countries `json:"countries"`
 	Genres          []Genres    `json:"genres"`
-	ID              int64       `json:"id"`
+	ID              int         `json:"id"`
 	OriginalTitle   string      `json:"original_title"`
 	Poster          string      `json:"poster"`
 	Quality         string      `json:"quality"`

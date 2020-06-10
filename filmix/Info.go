@@ -40,8 +40,8 @@ type Info struct {
 	Directors       []Directors `json:"directors"`
 	Duration        int64       `json:"duration"`
 	Genres          []Genres    `json:"genres"`
-	ID              int64       `json:"id"`
-	IDKinopoisk     int64       `json:"idKinopoisk"`
+	ID              int         `json:"id"`
+	IDKinopoisk     int         `json:"idKinopoisk"`
 	Mpaa            string      `json:"mpaa"`
 	OriginalTitle   string      `json:"original_title"`
 	Poster          string      `json:"poster"`
@@ -61,10 +61,11 @@ type Info struct {
 }
 
 //Info return info about film
-func (api *StructAPI) Info(id int64) Info {
+func (api *StructAPI) Info(id int) Info {
 
-	idString := strconv.FormatInt(id, 10)
+	idString := strconv.Itoa(id)
 	compl := api.Host + "/film/" + idString + "/details"
+	fmt.Println(compl)
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", compl, nil)
 	req.Header.Add("Accept", "application/json")
@@ -77,8 +78,8 @@ func (api *StructAPI) Info(id int64) Info {
 
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(resp.Status)
-	//fmt.Println(string(body))
+	fmt.Println(resp.Status)
+	fmt.Println(string(body))
 	var infData Info
 	if err := json.Unmarshal(body, &infData); err != nil {
 		panic(err)
