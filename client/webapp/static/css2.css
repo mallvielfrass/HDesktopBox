@@ -6,7 +6,6 @@
 
 }
 .resultItem {
-    height: 40px;
     width: 100%;
     
 
@@ -14,13 +13,22 @@
 .item {
     border: 1px solid #00B4CC;
     margin-top: 3px;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     width: 100%;
     background: #fff;
 }
 .result{
     justify-content: center; 
     display: flex;
+}
+.filmbox{
+  justify-content: left; 
+  width: 100%;
+  display: flex;
+}
+.filmItem {
+  padding-left:5px;
+  padding-top:5px;
 }
 .search{
     width: 100%;

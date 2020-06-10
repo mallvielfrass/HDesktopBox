@@ -10,7 +10,6 @@ var app = new Vue({
     handleSubmit: function Search(params) {
       params.preventDefault()
       console.log("send: ", this.movieTitle)
-
       axios
         .get('http://localhost:8181/s?q=' + this.movieTitle)
         .then(response => {
@@ -21,7 +20,8 @@ var app = new Vue({
           cd='<div>'
           for (let i = 0; i < this.info.filminfo.length; i++) { // выведет 0, затем 1, затем 2
             console.log("len:", i, ") ", this.info.filminfo.length)
-            mass = mass + ' <div class="item" >'+'<div> ${this.info.filminfo[i].title}</div>'+'<div>'+this.info.filminfo[i].original_title+'</div>'+ '</div>'
+            mass = mass +genItem(this.info.filminfo[i])
+
           }
           this.message = "Result for: " + this.movieTitle +  '<div class="result">'+'<div class="resultItem"> ' + mass + '</div>'+ '</div>'
         })
@@ -32,6 +32,7 @@ var app = new Vue({
         .finally(() => (this.loading = false));
 
     },
+
     handleChange(event) {
       this.movieTitle = event.target.value
       console.log(this.movieTitle)
