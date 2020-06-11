@@ -20,6 +20,7 @@ func main() {
 
 	//page
 	router.HandleFunc("/film/{id}", film)
+	router.HandleFunc("/test", test)
 	router.HandleFunc("/", index)
 
 	//run serve

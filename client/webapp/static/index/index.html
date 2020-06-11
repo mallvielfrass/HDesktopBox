@@ -23,7 +23,12 @@
         </div>
       </div>
      
-        <div class="v-message" v-html='message'> </div>
+        <div class="v-message" v-html='message'>
+          <ul > 
+            <li v-for="value in info.filminfo">
+              {{ value }}
+            </li>
+         </div>
      
 
     </div>

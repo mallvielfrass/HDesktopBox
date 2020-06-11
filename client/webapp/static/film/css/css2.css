@@ -1,0 +1,92 @@
+.resultItem2 {
+    height: 100px;
+    width: 100px;
+    background:red;
+    margin: 5px;
+
+}
+.resultItem {
+    width: 100%;
+    
+
+}
+.item {
+    border: 1px solid #00B4CC;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    background: #fff;
+}
+.result{
+    justify-content: center; 
+    display: flex;
+}
+.filmbox{
+  justify-content: left; 
+  width: 100%;
+  display: flex;
+}
+.filmItem {
+  padding-left:5px;
+  padding-top:5px;
+}
+.search{
+    width: 100%;
+    display: flex;
+ justify-content: center; 
+ margin-bottom: 10px;
+}
+.rootContainer{
+    width: 90%;
+    
+    padding: 3%;
+    display: grid;
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #bdbdbd;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.searchContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

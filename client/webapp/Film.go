@@ -4,10 +4,15 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"text/template"
 
 	"github.com/gorilla/mux"
 	"github.com/mallvielfrass/HDesktopBox/filmix"
 )
+
+type ViewData struct {
+	Message string
+}
 
 func film(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -23,5 +28,10 @@ func film(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(filmId.Items[0].ID)
 	IdInf := api.Info(i)
 	fmt.Printf("%s | %s | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID)
-	fmt.Fprint(w, IdInf)
+	data := ViewData{
+		Message: "FIFA will never regret it",
+	}
+	tmpl, _ := template.ParseFiles("static/film/film.html")
+	tmpl.Execute(w, data)
+	//fmt.Fprint(w, IdInf)
 }
