@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="stylesheet"  type="text/css" href="test/css/css2.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
+</head>
+
+
+<body>
+  <div id="app">
+
+   <p>{{ info.film.title }}</p> 
+   <p> {{ info.film.idKinopoisk }}</p>
+    <p>{{ info.film.short_story }}</p>
+  
+    <button v-on:click="click" class="btn btn-success">{{count}}</button>
+  </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="test/js/gen.js"></script>
+<script src="test/js/script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</html>
