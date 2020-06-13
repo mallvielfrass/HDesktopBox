@@ -49,6 +49,7 @@ func (api *StructAPI) Search(word string) Req {
 		fmt.Println("Errored when sending request to the server")
 	}
 	defer resp.Body.Close()
+	//fmt.Println(resp.Body)
 	body, _ := ioutil.ReadAll(resp.Body)
 	var data Req
 	if err := json.Unmarshal(body, &data); err != nil {

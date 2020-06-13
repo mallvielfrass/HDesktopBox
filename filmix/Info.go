@@ -78,8 +78,8 @@ func (api *StructAPI) Info(id int) Info {
 
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(resp.Status)
-	fmt.Println(string(body))
+	//fmt.Println(resp.Status)
+	//fmt.Println(string(body))
 	var infData Info
 	if err := json.Unmarshal(body, &infData); err != nil {
 		panic(err)

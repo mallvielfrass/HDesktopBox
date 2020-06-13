@@ -37,9 +37,12 @@ type FilmInfo struct {
 	Year          int64       `json:"year"`
 	OriginalTitle string      `json:"original_title"`
 }
+type Films struct {
+	FilmInfo []FilmInfo `json:"film"`
+}
 type Result struct {
-	FilmInfo []FilmInfo `json:"filminfo"`
-	Count    int        `json:"count"`
+	Films Films `json:"filminfo"`
+	Count int   `json:"count"`
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
@@ -60,12 +63,13 @@ func search(w http.ResponseWriter, r *http.Request) {
 	api := filmix.API("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6ImZ4LTVlZGQ3MGNiMzUzZGEifQ.eyJpc3MiOiJodHRwczpcL1wvZmlsbWl4Lm1lIiwiYXVkIjoiaHR0cHM6XC9cL2ZpbG1peC5tZSIsImp0aSI6ImZ4LTVlZGQ3MGNiMzUzZGEiLCJpYXQiOjE1OTE1NzA2MzUsIm5iZiI6MTU5MTU1OTgzNSwiZXhwIjoxNTk0MTYyNjM1LCJwYXJ0bmVyX2lkIjoiMiIsImhhc2giOiI2NzVhZjZiMDBiYWZhMDhmOGYwMDE5Y2Q3YWMyYmM4Zjk0MmQ0NDY5IiwidXNlcl9pZCI6bnVsbCwiaXNfcHJvIjpmYWxzZSwiaXNfcHJvX3BsdXMiOmZhbHNlLCJzZXJ2ZXIiOiIifQ.0xnppIMMr53upxHhrNbPkD0QJ5I14EyG72qMxfnbQL4")
 	filmId := api.Search(q)
 	count := len(filmId.Items)
-	fmt.Println("api ", filmId)
+	fmt.Println("api count", count)
 	if count < lim {
 		lim = count
 	}
 	fmt.Printf("count %d \n", lim)
-	FilmInfostr := []FilmInfo{}
+	FilmI := []FilmInfo{}
+
 	for i := 0; i < lim; i++ {
 		IdInf := api.Info(filmId.Items[i].ID)
 		fmt.Printf("%s | %s | %d | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID, IdInf.IDKinopoisk)
@@ -80,11 +84,14 @@ func search(w http.ResponseWriter, r *http.Request) {
 			Year:          IdInf.Year,
 			OriginalTitle: IdInf.OriginalTitle,
 		}
-		FilmInfostr = append(FilmInfostr, b)
+		FilmI = append(FilmI, b)
+	}
+	FilmInfostr := Films{
+		FilmInfo: FilmI,
 	}
 	res := Result{
-		FilmInfo: FilmInfostr,
-		Count:    count,
+		Films: FilmInfostr,
+		Count: count,
 	}
 	js, err := json.Marshal(res)
 	if err != nil {
@@ -96,6 +103,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
+	go fmt.Println(string(js))
 }
 func jearch(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("/j")
