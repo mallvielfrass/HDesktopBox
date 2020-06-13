@@ -43,6 +43,7 @@ type Result struct {
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("/s")
 	keys := r.URL.Query()
 	q := keys.Get("q")
 	lim, err := strconv.Atoi(keys.Get("l"))
@@ -97,7 +98,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 func jearch(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("/j")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
