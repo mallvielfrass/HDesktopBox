@@ -49,17 +49,18 @@ func (api *StructAPI) Search(word string) (Req, int) {
 		fmt.Println("Errored when sending request to the server")
 	}
 	defer resp.Body.Close()
-	//fmt.Println(resp.Body)
 
 	body, _ := ioutil.ReadAll(resp.Body)
 	var data Req
 	var status int
 	if err := json.Unmarshal(body, &data); err != nil {
-		panic(err)
-		status = 0
+		status = 1
+		fmt.Println("search.go err:58: ", err)
+
 	} else {
 
-		status = 1
+		status = 0
 	}
+	fmt.Println("search.go err:64: status ", status)
 	return data, status
 }

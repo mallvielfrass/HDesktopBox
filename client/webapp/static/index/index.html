@@ -23,6 +23,11 @@
                     </button>
                 </div>
             </div>
+            <div class="status" v-if="status">
+                <div class=" item"  >
+                    <div>Ошибка: Фильм не найден или нет подключения к сети/серверу</div>
+                </div>
+            </div>
             <div v-if="render">
                 <div v-for="item in info" :key="item.film">
                     <div class="result">
@@ -30,7 +35,8 @@
                             <div class="item">
                                 <div class="filmbox">
                                     <div class="filmItem"><a v-bind:href="'/film/'+item.film.id">
-                        <img v-bind:src='item.film.poster' width="110" height="165" onerror="this.src = '/index/pic/poster.jpg'"></a>
+                                            <img v-bind:src='item.film.poster' width="110" height="165"
+                                                onerror="this.src = '/index/pic/poster.jpg'"></a>
                                     </div>
                                     <div class="filmItem">
                                         <div><b>Название: </b>
@@ -40,18 +46,21 @@
                                         <div><b>Год: </b>{{item.film.year}}</div>
                                         <div><b>Страна: </b>{{item.film.countries}}</div>
                                         <div><b>Создатели: </b>{{item.film.directors}}</div>
-                                        <div><b>Описание: </b><h6>{{item.film.short_story}}</h6></div>
+                                        <div><b>Описание: </b>
+                                            <h6>{{item.film.short_story}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+
                 </div>
-              </div>
+
+
             </div>
         </div>
-    
-    
     </div>
-    </div>
-  </div>
 
 </body>
 
@@ -59,4 +68,5 @@
 <script src="index/js/script.js"></script>
 <script src="index/js/gen.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </html>
