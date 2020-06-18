@@ -29,8 +29,8 @@
                         <div class="res ultItem">
                             <div class="item">
                                 <div class="filmbox">
-                                    <div class="filmItem"><a v-bind:href="item.film.id">
-                        <img v-bind:src='item.film.poster' width="110" height="165" alt="logo.png"></a>
+                                    <div class="filmItem"><a v-bind:href="'/film/'+item.film.idKinopoisk">
+                        <img v-bind:src='item.film.poster' width="110" height="165" onerror="this.src = '/test/pic/poster.jpg'"></a>
                                     </div>
                                     <div class="filmItem">
                                         <div><b>Название: </b>

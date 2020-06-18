@@ -1,9 +1,10 @@
+
 var app = new Vue({
   el: '#app',
   data: {
     message: '',
     movieTitle: "",
-    info: [{film: {
+    info2: [{film: {
       idKinopoisk: 470036 ,
       slogan: "«From the creators of Despicable Me»" ,
       title: "Лоракс" ,
@@ -14,23 +15,21 @@ var app = new Vue({
       year: 2012 ,
       original_title: "Dr. Seuss\' The Lorax"
       } }],
-    info2: {},
+    info: {},
+
     render: false,
   },
   methods: {
     handleSubmit: function Search(params) {
-     axios.get('/s?q=marvel', null,null)
-      .then((response) => {
-        this.info2 = response.data;
-      }).catch((error) => {
-        this.availabilityMessage = false;
-        console.log(error);
-      });
-      this.info = genItem2(this.info2)
-      this.render = true
-      console.log("send: ", this.movieTitle)
-      console.log("rec: ", this.info)
-      console.log("rec: ", this.info[0].film.title)
+      axios.get('/j?q=' + this.movieTitle).then(response => {
+        this.info = genItem2(response.data)
+        this.render = true
+        console.log("send: ", this.movieTitle)
+        console.log("rec: ", this.info)
+        console.log("rec: ", this.info[0].film.title)
+      })
+     
+    
 
     },
 

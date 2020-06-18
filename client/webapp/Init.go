@@ -12,6 +12,7 @@ func main() {
 	//file routers
 	router.HandleFunc("/{page}/css/{object}", CssRouter)
 	router.HandleFunc("/{page}/js/{object}", JsRouter)
+	router.HandleFunc("/{page}/pic/{object}", PicRouter)
 	router.HandleFunc("/favicon.ico", faviconRouter)
 
 	//api

@@ -61,7 +61,7 @@ stor=object.short_story
 }
  console.log(stor)
  
-pic='<a href="/film/'+object.id+'"><img src="'+object.poster+'" width="110" height="165" alt="logo.png"></a>' 
+pic='<a href="/film/'+object.id+'"><img src="'+object.poster+'" width="110" height="165" alt="/static/test/pic/poster.jpg"></a>' 
 info='<div><b>Название: </b>'+'<a href="/film/'+object.id+'">'+object.title+'</a>'+'</div>'+'<div><b>Оригинальное название: </b>'+object.original_title+'</div><div><b>Год: </b>'+object.year+'</div><div><b>Страна: </b>'+country+'</div>'+'<div><b>Создатели: </b>'+creators+'</div>'+'<div><b>Описание: </b>'+stor+'</div>'
     result='<div class="filmItem" >'+pic+'</div>'+'<div class="filmItem" >'+info+'</div>'
 

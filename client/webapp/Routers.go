@@ -38,7 +38,19 @@ func JsRouter(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/javascript")
 	http.ServeFile(w, r, path)
 }
-
+func PicRouter(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	page := vars["page"]
+	object := vars["object"]
+	//response := fmt.Sprintf("%s", id)
+	path := "./static/" + page + "/pic/" + object
+	fmt.Println(path)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Content-Type", "image/jpeg")
+	http.ServeFile(w, r, path)
+}
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	// Choose the folder to serve
