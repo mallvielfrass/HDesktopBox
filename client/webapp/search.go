@@ -34,7 +34,7 @@ type FilmInfo struct {
 	Poster        string      `json:"poster"`
 	Directors     interface{} `json:"directors"`
 	ShortStory    string      `json:"short_story"`
-	Year          int64       `json:"year"`
+	Year          int         `json:"year"`
 	OriginalTitle string      `json:"original_title"`
 }
 type Films struct {

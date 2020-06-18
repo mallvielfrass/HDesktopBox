@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta charset="UTF-8">
-  <link rel="stylesheet"  type="text/css" href="/film/css/css2.css">
-  <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/film/css/css2.css">
+
+    <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
+  </head>
 
 
-<body>
+  <body>
     <div id="app">
-        <div class="rootContainer">
-            <div class="item" >
-                <div class="filmbox" >
-                  {{.Message}}
-
-                </div>
+      <div class="rootContainer">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What are you
+            looking for?" :value="movieTitle"
+            @keyup.enter="handleSubmit" @keyup="handleChange">
+          <button type="button" value="SEARCH" @click="handleSubmit"
+            class="searchButton">
+            &#8981;
+          </button>
+        </div>
+        <div class="item">
+          <div class="filmbox">
+            <div class="filmItem">
+              <a href="'/film/'+{{.Id}}">
+                <img src='{{.Poster}}'
+                  width="110" height="165"
+                  onerror="this.src=
+                  '/index/pic/poster.jpg'"></a>
             </div>
-     
-
+            <div class="filmItem">
+              <div><b>Название: </b>{{.Title}}</a></div>
+            <div><b>Оригинальное название: </b>{{.OriginalTitle}}</div>
+            <div><b>Год: </b>{{.Year}}</div>
+            <div><b>Страна: </b>{{.Countries}}</div>
+            <div><b>Создатели: </b>{{.Directors}}</div>
+            <div><b>Id: </b>{{.Id}}</div>
+            <div><b>Описание: </b><h6>{{.ShortStory}}</h6></div>
+          </div>
+        </div>
+       
+          <div class="resbox">
+            <div class="resItem" @click="currentTab= 'online'" ><a href="#">Online</a></div>
+            <div class="resItem" @click="currentTab= 'torrent'"><a href="#">Torrent</a></div>
+          </div>
+  
+          <div class="tab-content">
+            <div v-if="currentTab == 'online'">Online </div>
+            <div v-if="currentTab == 'torrent'">Torrent</div>
+          </div>
+        
+      </div>
+      </div>
     </div>
-  </div>
 
-</body>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="/film/js/script.js"></script>
-<script src="/film/js/gen.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="/film/js/script.js"></script>
+  <script src="/film/js/gen.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

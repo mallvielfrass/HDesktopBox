@@ -57,7 +57,7 @@ type Info struct {
 	VotesKinopoisk  int64       `json:"votesKinopoisk"`
 	VotesNeg        int64       `json:"votesNeg"`
 	VotesPos        int64       `json:"votesPos"`
-	Year            int64       `json:"year"`
+	Year            int         `json:"year"`
 }
 
 //Info return info about film

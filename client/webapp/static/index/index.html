@@ -1,72 +1,77 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="index/css/css2.css">
-    <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="index/css/css2.css">
+        <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">-->
+    </head>
 
 
-<body>
+    <body>
 
-    <div id="app">
-
-        <div class="rootContainer">
-            <div class="search">
+        <div id="app">
+            <div class="rootContainer">
                 <div class="search">
-                    <input type="text" class="searchTerm" placeholder="What are you looking for?" :value="movieTitle"
-                        @keyup.enter="handleSubmit" @keyup="handleChange">
-                    <button type="button" value="SEARCH" @click="handleSubmit" class="searchButton">
-                        &#8981;
-                    </button>
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder="What
+                            are you looking for?"
+                            :value="movieTitle"
+                            @keyup.enter="handleSubmit" @keyup="handleChange">
+                        <button type="button" value="SEARCH"
+                            @click="handleSubmit" class="searchButton">
+                            &#8981;
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="status" v-if="status">
-                <div class=" item"  >
-                    <div>Ошибка: Фильм не найден или нет подключения к сети/серверу</div>
+                <div class="status" v-if="status">
+                    <div class="item">
+                        <div>Ошибка: Фильм не найден или нет подключения к
+                            сети/серверу</div>
+                    </div>
                 </div>
-            </div>
-            <div v-if="render">
-                <div v-for="item in info" :key="item.film">
-                    <div class="result">
-                        <div class="res ultItem">
-                            <div class="item">
-                                <div class="filmbox">
-                                    <div class="filmItem"><a v-bind:href="'/film/'+item.film.id">
-                                            <img v-bind:src='item.film.poster' width="110" height="165"
-                                                onerror="this.src = '/index/pic/poster.jpg'"></a>
-                                    </div>
-                                    <div class="filmItem">
-                                        <div><b>Название: </b>
-                                            <a v-bind:href="'/film/'+item.film.id">{{item.film.title}}</a>
+                <div v-if="render">
+                    <div v-for="item in info" :key="item.film">
+                        <div class="result">
+                            <div class="res ultItem">
+                                <div class="item">
+                                    <div class="filmbox">
+                                        <div class="filmItem">
+                                            <a
+                                                v-bind:href="'/film/'+item.film.id">
+                                                <img
+                                                    v-bind:src='item.film.poster'
+                                                    width="110" height="165"
+                                                    onerror="this.src=
+                                                    '/index/pic/poster.jpg'"></a>
                                         </div>
-                                        <div><b>Оригинальное название: </b>{{item.film.original_title}}</div>
-                                        <div><b>Год: </b>{{item.film.year}}</div>
-                                        <div><b>Страна: </b>{{item.film.countries}}</div>
-                                        <div><b>Создатели: </b>{{item.film.directors}}</div>
-                                        <div><b>Описание: </b>
-                                            <h6>{{item.film.short_story}}</h6>
+                                        <div class="filmItem">
+                                            <div><b>Название: </b> <a
+                                                    v-bind:href="'/film/'+item.film.id">{{item.film.title}}</a>
+                                            </div>
+                                            <div><b>Оригинальное название: </b>{{item.film.original_title}}</div>
+                                            <div><b>Год: </b>{{item.film.year}}</div>
+                                            <div><b>Страна: </b>{{item.film.countries}}</div>
+                                            <div><b>Создатели: </b>{{item.film.directors}}</div>
+                                            <div><b>Описание: </b>
+                                                <h6>{{item.film.short_story}}</h6>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
-    </div>
 
-</body>
+    </body>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="index/js/script.js"></script>
-<script src="index/js/gen.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="index/js/script.js"></script>
+    <script src="index/js/gen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

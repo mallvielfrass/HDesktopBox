@@ -11,7 +11,14 @@ import (
 )
 
 type ViewData struct {
-	Message string
+	Id            int
+	Title         string
+	Poster        string
+	OriginalTitle string
+	Year          int
+	Countries     string
+	Directors     string
+	ShortStory    string
 }
 
 func film(w http.ResponseWriter, r *http.Request) {
@@ -28,8 +35,17 @@ func film(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(filmId.Items[0].ID)
 	IdInf := api.Info(i)
 	fmt.Printf("%s | %s | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID)
+	Countries := ""
+	Directors := ""
 	data := ViewData{
-		Message: "FIFA will never regret it",
+		Id:            IdInf.ID,
+		Title:         IdInf.Title,
+		Poster:        IdInf.Poster,
+		OriginalTitle: IdInf.OriginalTitle,
+		Year:          IdInf.Year,
+		Countries:     Countries,
+		Directors:     Directors,
+		ShortStory:    IdInf.ShortStory,
 	}
 	tmpl, _ := template.ParseFiles("static/film/film.html")
 	tmpl.Execute(w, data)
