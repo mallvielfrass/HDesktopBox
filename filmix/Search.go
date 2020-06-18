@@ -34,7 +34,7 @@ type Req struct {
 }
 
 //Search info on filmix
-func (api *StructAPI) Search(word string) Req {
+func (api *StructAPI) Search(word string) (Req, int) {
 	serv := "http://5.61.48.15/partner_api/list?"
 	par := "search=" + word + "&sort=news_read&page=0"
 	compl := serv + par
@@ -50,10 +50,16 @@ func (api *StructAPI) Search(word string) Req {
 	}
 	defer resp.Body.Close()
 	//fmt.Println(resp.Body)
+
 	body, _ := ioutil.ReadAll(resp.Body)
 	var data Req
+	var status int
 	if err := json.Unmarshal(body, &data); err != nil {
 		panic(err)
+		status = 0
+	} else {
+
+		status = 1
 	}
-	return data
+	return data, status
 }
