@@ -24,7 +24,7 @@ type Items struct {
 	Updated         string      `json:"updated"`
 	VotesNeg        int64       `json:"votesNeg"`
 	VotesPos        int64       `json:"votesPos"`
-	Year            int64       `json:"year"`
+	Year            int         `json:"year"`
 }
 type Req struct {
 	HasNextPage bool    `json:"has_next_page"`

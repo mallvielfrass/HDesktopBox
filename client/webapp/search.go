@@ -69,30 +69,33 @@ func search(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("count %d \n", lim)
 	FilmI := []FilmInfo{}
-
 	for i := 0; i < lim; i++ {
 		IdInf := api.Info(filmId.Items[i].ID)
 		fmt.Printf("%s | %s | %d | %d | %d \n", IdInf.OriginalTitle, IdInf.Title, IdInf.Year, IdInf.ID, IdInf.IDKinopoisk)
-		b := FilmInfo{
-			ID:            IdInf.ID,
-			Slogan:        IdInf.Slogan,
-			Title:         IdInf.Title,
-			Countries:     IdInf.Countries,
-			Poster:        IdInf.Poster,
-			Directors:     IdInf.Directors,
-			ShortStory:    IdInf.ShortStory,
-			Year:          IdInf.Year,
-			OriginalTitle: IdInf.OriginalTitle,
+		if IdInf.Year != 0 {
+			b := FilmInfo{
+				ID:            IdInf.ID,
+				Slogan:        IdInf.Slogan,
+				Title:         IdInf.Title,
+				Countries:     IdInf.Countries,
+				Poster:        IdInf.Poster,
+				Directors:     IdInf.Directors,
+				ShortStory:    IdInf.ShortStory,
+				Year:          IdInf.Year,
+				OriginalTitle: IdInf.OriginalTitle,
+			}
+			FilmI = append(FilmI, b)
+
 		}
-		FilmI = append(FilmI, b)
 	}
 	FilmInfostr := Films{
 		FilmInfo: FilmI,
 	}
 	res := Result{
 		Films: FilmInfostr,
-		Count: count,
+		Count: len(FilmI),
 	}
+	fmt.Println("len films: ", len(FilmI))
 	js, err := json.Marshal(res)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
