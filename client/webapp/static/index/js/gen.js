@@ -1,32 +1,40 @@
-function genItem(object){
-  country=""
-  creators=""
-  for (let i = 0; i < object.directors.length; i++) { // выведет 0, затем 1, затем 2
-    console.log("creators:", i, ") ",object.directors[i].name)
-    creators = creators +" "+object.directors[i].name
 
-  }
-  for (let i = 0; i < object.countries.length; i++) { // выведет 0, затем 1, затем 2
-    console.log("country:", i, ") ",object.countries[i].name)
-    country = country +" "+object.countries[i].name
+function genItem2(object){
+  info = []
+  jsv = object  
+  console.log('len: ',  Object.keys(jsv.filminfo.film).length)
+  for (var i = 0; i < Object.keys(jsv.filminfo.film).length; i++) {
+    console.log('iter i:', i)
+    console.log("film:", jsv.filminfo.film[0])
+    console.log("countries:", Object.keys(jsv.filminfo.film[i].countries).length)
+    country =""
+    creators = ""
+  
+    for (let z = 0; z <  Object.keys(jsv.filminfo.film[i].countries).length; z++) {
 
-  }
-  stor=""
-  if (object.short_story.length>400) {
-    stor=object.short_story.substr(0, 400)+'<details><summary><span><b>Раскрыть</b></span></summary><span>'+object.short_story.substr(400, object.short_story.length)+'</span></details>'
-} else{
-stor=object.short_story 
-}
- console.log(stor)
+      console.log('country:', z, ') ', jsv.filminfo.film[i].countries[z].name)
+      country = country + ' ' + jsv.filminfo.film[i].countries[z].name
+    }
+  
+  
+    for (let n = 0; n <  Object.keys(jsv.filminfo.film[i].directors).length; n++) {
  
-pic='<a href="/film/'+object.id+'"><img src="'+object.poster+'" width="110" height="165" alt="logo.png"></a>' 
-info='<div><b>Название: </b>'+'<a href="/film/'+object.id+'">'+object.title+'</a>'+'</div>'+'<div><b>Оригинальное название: </b>'+object.original_title+'</div><div><b>Год: </b>'+object.year+'</div><div><b>Страна: </b>'+country+'</div>'+'<div><b>Создатели: </b>'+creators+'</div>'+'<div><b>Описание: </b>'+stor+'</div>'
-    result='<div class="filmItem" >'+pic+'</div>'+'<div class="filmItem" >'+info+'</div>'
-
-
-
-   res=' <div class="item" ><div class="filmbox" >'+ result+'</div></div>'
-    console.log("gen")
-   
-    return res
+      console.log('directors:', n, ') ', jsv.filminfo.film[i].directors[n].name)
+      creators = creators + ' ' + jsv.filminfo.film[i].directors[n].name
+    }
+    info.push({ film: {
+       id: jsv.filminfo.film[i].id,
+       slogan: jsv.filminfo.film[i].slogan,
+       title: jsv.filminfo.film[i].title,
+       countries:country,
+       poster: jsv.filminfo.film[i].poster,
+       directors:creators,
+       short_story: jsv.filminfo.film[i].short_story,
+       year: jsv.filminfo.film[i].year,
+       original_title: jsv.filminfo.film[i]. original_title,
+       } });
   }
+ // console.log(info)
+  console.log(' info.length:', Object.keys(info).length)
+    return  info
+}
